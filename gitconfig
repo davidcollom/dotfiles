@@ -1,0 +1,42 @@
+[user]
+	name = David Collom
+	email = david@collom.co.uk
+
+[include]
+    path = ~/.gitconfig-extras
+
+[color]
+    diff=auto
+    status=auto
+    branch=auto
+
+[alias]
+	s = status
+	d = diff
+	ds = diff --staged
+	co = checkout
+	br = branch
+
+[help]
+    autocorrect = 5
+
+[url "https://"]
+    insteadOf = git://
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+
+[diff]
+	tool = diffmerge
+[difftool "diffmerge"]
+	cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
+[merge]
+	tool = diffmerge
+[mergetool "diffmerge"]
+	trustExitCode = true
+	cmd = diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+
+[pull]
+	rebase = false
+
+[core]
+	excludesFile = ~/.gitignore

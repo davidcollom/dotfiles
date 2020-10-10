@@ -1,0 +1,27 @@
+{
+  "editor.renderWhitespace": "all",
+  "editor.suggestSelection": "first",
+  "editor.tabSize": 2,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "go.formatTool": "goimports",
+  "go.useLanguageServer": true,
+  "go.autocompleteUnimportedPackages": true,
+  "python.jediEnabled": false,
+  "python.languageServer": "Microsoft",
+  "vsicons.dontShowNewVersionMessage": true,
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "window.zoomLevel": 0,
+  "workbench.colorTheme": "Monokai Dimmed",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.statusBar.feedback.visible": false,
+  "search.exclude": {
+    "**/*.tfstate*": true
+  },
+  "cSpell.language": "en-GB",
+  "files.associations": {
+    "bash_profile": "shellscript"
+  },
+  "latex-workshop.view.pdf.viewer": "browser"
+}
