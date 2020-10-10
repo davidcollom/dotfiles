@@ -3,6 +3,9 @@
 # install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
+# Sudo password first..
+sudo -v
+
 # install git
 brew install git
 
@@ -21,8 +24,8 @@ cp /tmp/dotfiles/gitignore ~/.gitignore
 for f in $(ls /tmp/dotfiles/bash*); do
   echo cp /tmp/dotfiles/${f} ~/.$(basename $f)
 done
-echo /usr/local/bin/bash >> /etc/shells
-chsh -s /usr/local/bin/bash ${USER}
+sudo echo /usr/local/bin/bash >> /etc/shells
+sudo chsh -s /usr/local/bin/bash ${USER}
 
 # Install code extensions
 code --install-extension DavidAnson.vscode-markdownlint
