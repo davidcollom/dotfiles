@@ -49,5 +49,13 @@ code --install-extension VisualStudioExptTeam.vscodeintellicode
 code --install-extension haaaad.ansible
 code --install-extension vscoss.vscode-ansible
 
+# Kubernetes krew plugins
+kubectl krew install access-matrix
+kubectl krew install who-can
+kubectl krew install outdated
+kubectl krew install sniff
+kubectl krew install tree
+kubectl krew install view-secret
+
 # Setup settings of VS Code
 cp /tmp/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json

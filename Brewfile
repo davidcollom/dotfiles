@@ -60,6 +60,7 @@ cask "osxfuse"
 brew "telepresence"
 brew "krew"
 brew "velero"
+cask "lens"
 
 # Hashicorp
 brew "vault"
