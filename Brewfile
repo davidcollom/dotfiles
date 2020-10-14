@@ -6,6 +6,7 @@ tap "fluxcd/tap"
 tap "txn2/tap"
 tap "datawire/blackbird"
 tap "alextodicescu/tgenv"
+tap "little-angry-clouds/homebrew-my-brews"
 
 # General
 brew "ack"
@@ -41,6 +42,8 @@ brew "git-extras"
 cask "diffmerge"
 brew "go"
 brew "rbenv"
+brew "gh"
+brew "cookiecutter"
 
 # Collaboration
 brew "tmate"
@@ -52,13 +55,16 @@ brew "kops"
 brew "kube-fzf"
 brew "kubectx"
 brew "kubefwd"
-brew "kubernetes-cli"
-brew "kubernetes-helm"
+# brew "kubernetes-cli"
+brew "kbenv"
+# brew "kubernetes-helm"
+brew "helmenv"
 brew "sops"
 brew "stern"
 cask "osxfuse"
 brew "telepresence"
 brew "krew"
+brew "kind"
 brew "velero"
 cask "lens"
 
@@ -72,6 +78,9 @@ brew "consul"
 
 # GPG
 brew "pinentry-mac"
+brew "gnupg"
+cask "gpg-suite"
+cask "keybase"
 
 # Applications
 cask "aerial"
@@ -92,6 +101,8 @@ cask "tunnelblick"
 cask "virtualbox"
 cask "visual-studio-code"
 cask "vlc"
+cask "zoomus"
+cask "notion"
 
 mas "Dashlane", id: 552383089
 mas "LanScan", id: 472226235
