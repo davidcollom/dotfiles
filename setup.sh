@@ -57,6 +57,7 @@ kubectl krew install outdated
 kubectl krew install sniff
 kubectl krew install tree
 kubectl krew install view-secret
+kubectl krew install neat
 
 # Setup settings of VS Code
 cp /tmp/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
