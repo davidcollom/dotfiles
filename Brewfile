@@ -81,6 +81,7 @@ brew "pinentry-mac"
 brew "gnupg"
 cask "gpg-suite"
 cask "keybase"
+cask "mkcert"
 
 # Applications
 cask "aerial"
