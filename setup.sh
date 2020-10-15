@@ -13,7 +13,7 @@ brew install git
 git clone https://github.com/davidcollom/dotfiles.git /tmp/dotfiles
 
 # install packages
-cd /tmp/dotfiles
+cd /tmp/dotfiles || echo "Failed to clone repo to /tmp/dotfiles" && exit 1
 brew bundle
 
 # Setup gitconfig
@@ -21,11 +21,11 @@ cp /tmp/dotfiles/gitconfig ~/.gitconfig
 cp /tmp/dotfiles/gitignore ~/.gitignore
 
 # Setup Bash
-for f in $(ls /tmp/dotfiles/bash*); do
-  echo cp /tmp/dotfiles/${f} ~/.$(basename $f)
+for f in ./bash*; do
+  cp "/tmp/dotfiles/${f}" "${HOME}/.$(basename "$f")"
 done
 echo /usr/local/bin/bash | tee -a /etc/shells
-sudo chsh -s /usr/local/bin/bash ${USER}
+sudo chsh -s /usr/local/bin/bash "${USER}"
 
 # Install code extensions
 code --install-extension DavidAnson.vscode-markdownlint
