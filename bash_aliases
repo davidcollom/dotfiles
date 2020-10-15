@@ -48,4 +48,5 @@ alias git-sync="git checkout master && git fetch upstream && git rebase upstream
 alias git-clean="git branch --merged | egrep -v \"(^\*|master|dev)\" | xargs git branch -d && git remote prune origin && git remote prune upstream"
 alias gcloud-personal="gcloud config set core/account david@collom.co.ul"
 alias gcloud-work="gcloud config set core/account david.collom@jetstack.io"
+alias gcloud-login="gcloud auth login; gcloud auth application-default login"
 alias k="kubectl"
