@@ -59,5 +59,13 @@ kubectl krew install tree
 kubectl krew install view-secret
 kubectl krew install neat
 
+# Gcloud Components
+gcloud config set disable_usage_reporting false
+gcloud components install docker-credential-gcr
+gcloud components install nomos
+gcloud components install gsutil
+gcloud components update
+
+
 # Setup settings of VS Code
 cp /tmp/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
