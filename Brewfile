@@ -28,6 +28,7 @@ brew "tree"
 brew "watch"
 brew "wget"
 brew "yq"
+brew "shellcheck"
 
 # Automation
 brew "ansible"
@@ -79,9 +80,9 @@ brew "consul"
 # GPG
 brew "pinentry-mac"
 brew "gnupg"
+brew "mkcert"
 cask "gpg-suite"
 cask "keybase"
-cask "mkcert"
 
 # Applications
 cask "aerial"
