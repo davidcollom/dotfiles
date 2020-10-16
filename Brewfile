@@ -69,6 +69,7 @@ brew "kind"
 brew "velero"
 cask "lens"
 brew "kustomize"
+brew "argocd"
 
 # Hashicorp
 brew "vault"
