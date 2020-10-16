@@ -68,6 +68,7 @@ brew "krew"
 brew "kind"
 brew "velero"
 cask "lens"
+brew "kustomize"
 
 # Hashicorp
 brew "vault"
