@@ -49,6 +49,7 @@ code --install-extension VisualStudioExptTeam.vscodeintellicode
 code --install-extension haaaad.ansible
 code --install-extension vscoss.vscode-ansible
 code --install-extension adamhartford.vscode-base64
+code --install-extension bazelbuild.vscode-bazel
 
 # Kubernetes krew plugins
 kubectl krew install access-matrix
