@@ -24,7 +24,7 @@ cp /tmp/dotfiles/gitignore ~/.gitignore
 for f in ./bash*; do
   cp "/tmp/dotfiles/${f}" "${HOME}/.$(basename "$f")"
 done
-echo /usr/local/bin/bash | tee -a /etc/shells
+echo /usr/local/bin/bash | sudo tee -a /etc/shells
 sudo chsh -s /usr/local/bin/bash "${USER}"
 
 # Install code extensions
