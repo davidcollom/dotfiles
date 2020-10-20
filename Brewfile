@@ -29,6 +29,7 @@ brew "watch"
 brew "wget"
 brew "yq"
 brew "shellcheck"
+brew "asciinema"
 
 # Automation
 brew "ansible"
