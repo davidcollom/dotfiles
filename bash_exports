@@ -20,3 +20,5 @@ export GPG_TTY=$(tty)
 
 # Silence zsh warning
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --cycle'
