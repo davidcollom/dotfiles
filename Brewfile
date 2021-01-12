@@ -77,6 +77,7 @@ brew "vault"
 brew "packer"
 brew "tfenv"
 brew "tgenv"
+brew "tfsec"
 brew "terraform-docs"
 brew "consul"
 
