@@ -6,7 +6,7 @@ tap "fluxcd/tap"
 tap "txn2/tap"
 tap "datawire/blackbird"
 tap "alextodicescu/tgenv"
-tap "little-angry-clouds/homebrew-my-brews"
+tap "little-angry-clouds/my-brews"
 
 # General
 brew "ack"
@@ -30,6 +30,7 @@ brew "wget"
 brew "yq"
 brew "shellcheck"
 brew "asciinema"
+brew "speedtest-cli"
 
 # Automation
 brew "ansible"
@@ -57,10 +58,11 @@ brew "kops"
 brew "kube-fzf"
 brew "kubectx"
 brew "kubefwd"
-# brew "kubernetes-cli"
+brew "kubernetes-cli", link: false
 brew "kbenv"
-# brew "kubernetes-helm"
+brew "kubernetes-helm", link: false
 brew "helmenv"
+brew "kubebuilder"
 brew "sops"
 brew "stern"
 cask "osxfuse"
@@ -70,6 +72,7 @@ brew "kind"
 brew "velero"
 cask "lens"
 brew "kustomize"
+brew "argo"
 brew "argocd"
 
 # Hashicorp
@@ -83,7 +86,7 @@ brew "consul"
 
 # GPG
 brew "pinentry-mac"
-brew "gnupg"
+brew "gnupg", link: false
 brew "mkcert"
 cask "gpg-suite"
 cask "keybase"
