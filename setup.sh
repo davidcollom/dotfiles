@@ -58,6 +58,7 @@ kubectl krew install outdated
 kubectl krew install sniff
 kubectl krew install tree
 kubectl krew install view-secret
+kubectl krew install view-webhook
 kubectl krew install neat
 
 # Gcloud Components
