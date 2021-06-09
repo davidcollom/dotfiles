@@ -31,6 +31,7 @@ brew "yq"
 brew "shellcheck"
 brew "asciinema"
 brew "speedtest-cli"
+brew "pwgen"
 
 # Automation
 brew "ansible"
@@ -45,6 +46,8 @@ brew "git-extras"
 cask "diffmerge"
 brew "go"
 brew "rbenv"
+brew "pyenv"
+brew "shellcheck"
 brew "gh"
 brew "cookiecutter"
 
@@ -62,6 +65,7 @@ brew "kubernetes-cli", link: false
 brew "kbenv"
 brew "kubernetes-helm", link: false
 brew "helmenv"
+brew "helmfile"
 brew "kubebuilder"
 brew "sops"
 brew "stern"
@@ -110,11 +114,15 @@ cask "tunnelblick"
 cask "virtualbox"
 cask "visual-studio-code"
 cask "vlc"
-cask "zoomus"
+cask "zoom"
 cask "notion"
+cask 'clockify'
 
 mas "Dashlane", id: 552383089
 mas "LanScan", id: 472226235
 mas "Pocket", id: 568494494
 mas "Ring", id: 1142753258
 mas "Trello", id: 1278508951
+
+tap "homebrew/cask-fonts"
+cask "font-source-code-pro"
