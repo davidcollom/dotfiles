@@ -78,6 +78,7 @@ cask "lens"
 brew "kustomize"
 brew "argo"
 brew "argocd"
+brew "FairwindsOps/tap/pluto"
 
 # Hashicorp
 brew "vault"
