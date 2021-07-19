@@ -50,6 +50,8 @@ alias gcloud-personal="gcloud config set core/account david@collom.co.ul"
 alias gcloud-work="gcloud config set core/account david.collom@jetstack.io"
 alias gcloud-login="gcloud auth login; gcloud auth application-default login"
 alias k="kubectl"
+alias kctx="kubectx"
+alias kns="kubens"
 
 alias tf="terraform"
 alias tg="terragrunt"
