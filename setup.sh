@@ -68,6 +68,9 @@ gcloud components install nomos
 gcloud components install gsutil
 gcloud components update
 
+pip3 install -r requirements.txt
+
+
 
 # Setup settings of VS Code
 cp /tmp/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
