@@ -53,12 +53,29 @@ code --install-extension bazelbuild.vscode-bazel
 
 # Kubernetes krew plugins
 kubectl krew install access-matrix
-kubectl krew install who-can
+kubectl krew install advise-psp
+kubectl krew install cert-manager
+kubectl krew install doctor
+kubectl krew install edit-status
+kubectl krew install evict-pod
+kubectl krew install exec-cronjob
+kubectl krew install get-all
+kubectl krew install ingress-nginx
+kubectl krew install neat
+kubectl krew install np-viewer
 kubectl krew install outdated
+kubectl krew install prune-unused
+kubectl krew install rbac-view
+kubectl krew install service-tree
 kubectl krew install sniff
 kubectl krew install tree
+kubectl krew install unused-volumes
+kubectl krew install view-cert
 kubectl krew install view-secret
-kubectl krew install neat
+kubectl krew install view-utilization
+kubectl krew install view-webhook
+kubectl krew install who-can
+kubectl krew install whoami
 
 # Gcloud Components
 gcloud config set disable_usage_reporting false
