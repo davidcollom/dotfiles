@@ -62,6 +62,7 @@ kubectl krew install exec-cronjob
 kubectl krew install get-all
 kubectl krew install ingress-nginx
 kubectl krew install neat
+kubectl krew install neat
 kubectl krew install np-viewer
 kubectl krew install outdated
 kubectl krew install prune-unused
@@ -83,6 +84,9 @@ gcloud components install docker-credential-gcr
 gcloud components install nomos
 gcloud components install gsutil
 gcloud components update
+
+pip3 install -r requirements.txt
+
 
 
 # Setup settings of VS Code
