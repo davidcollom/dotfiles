@@ -68,6 +68,7 @@ brew "tfenv"
 brew "tgenv"
 brew "terraform-docs"
 brew "consul"
+brew "terraformer"
 
 # GPG
 brew "pinentry-mac"
