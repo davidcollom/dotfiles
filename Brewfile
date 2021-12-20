@@ -79,6 +79,7 @@ brew "kustomize"
 brew "argo"
 brew "argocd"
 brew "FairwindsOps/tap/pluto"
+brew "kubeseal"
 
 # Hashicorp
 brew "vault"
