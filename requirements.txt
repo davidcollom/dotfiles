@@ -1,0 +1,11 @@
+termdown
+docker
+requests
+yamllint
+watchdog
+retry
+slack-sdk
+faker
+jsonpatch
+kubernetes
+deepmerge

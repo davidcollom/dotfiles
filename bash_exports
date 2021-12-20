@@ -1,4 +1,6 @@
 export DIGITALOCEAN_ENABLE_BETA=1
+
+# Setup Krew plugins
 export PATH=~/.krew/bin:${PATH}
 export HISTCONTROL=ignoreboth:erasedups
 
@@ -9,10 +11,14 @@ export EDITOR='vim'
 export LANG='en_GB.UTF-8'
 export LC_ALL='en_GB.UTF-8'
 
-
+## GoLang setup....
 export GOPATH=$(go env GOPATH)
 export PATH=$PATH:$(go env GOPATH)/bin
+
+# GPG TTY Fix
 export GPG_TTY=$(tty)
 
 # Silence zsh warning
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --cycle'

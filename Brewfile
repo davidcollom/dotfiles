@@ -6,6 +6,7 @@ tap "fluxcd/tap"
 tap "txn2/tap"
 tap "datawire/blackbird"
 tap "alextodicescu/tgenv"
+tap "little-angry-clouds/my-brews"
 
 # General
 brew "ack"
@@ -27,6 +28,10 @@ brew "tree"
 brew "watch"
 brew "wget"
 brew "yq"
+brew "shellcheck"
+brew "asciinema"
+brew "speedtest-cli"
+brew "pwgen"
 
 # Automation
 brew "ansible"
@@ -41,6 +46,10 @@ brew "git-extras"
 cask "diffmerge"
 brew "go"
 brew "rbenv"
+brew "pyenv"
+brew "shellcheck"
+brew "gh"
+brew "cookiecutter"
 
 # Collaboration
 brew "tmate"
@@ -52,26 +61,41 @@ brew "kops"
 brew "kube-fzf"
 brew "kubectx"
 brew "kubefwd"
-brew "kubernetes-cli"
-brew "kubernetes-helm"
+brew "kubernetes-cli", link: false
+brew "kbenv"
+brew "kubernetes-helm", link: false
+brew "helmenv"
+brew "helmfile"
+brew "kubebuilder"
 brew "sops"
 brew "stern"
 cask "osxfuse"
 brew "telepresence"
 brew "krew"
+brew "kind"
 brew "velero"
+cask "lens"
+brew "kustomize"
+brew "argo"
+brew "argocd"
+brew "FairwindsOps/tap/pluto"
 
 # Hashicorp
 brew "vault"
 brew "packer"
 brew "tfenv"
 brew "tgenv"
+brew "tfsec"
 brew "terraform-docs"
 brew "consul"
 brew "terraformer"
 
 # GPG
 brew "pinentry-mac"
+brew "gnupg", link: false
+brew "mkcert"
+cask "gpg-suite"
+cask "keybase"
 
 # Applications
 cask "aerial"
@@ -92,9 +116,15 @@ cask "tunnelblick"
 cask "virtualbox"
 cask "visual-studio-code"
 cask "vlc"
+cask "zoom"
+cask "notion"
+cask 'clockify'
 
 mas "Dashlane", id: 552383089
 mas "LanScan", id: 472226235
 mas "Pocket", id: 568494494
 mas "Ring", id: 1142753258
 mas "Trello", id: 1278508951
+
+tap "homebrew/cask-fonts"
+cask "font-source-code-pro"

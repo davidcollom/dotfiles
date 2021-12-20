@@ -36,7 +36,7 @@
 	cmd = diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 
 [pull]
-	rebase = false
+	rebase = true
 
 [core]
 	excludesFile = ~/.gitignore

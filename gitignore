@@ -13,5 +13,16 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 
-# Ignore all local TF States
-**/*.tfstate*
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
+# example: *tfplan*
+*.plan
+
+# Swap files
+*.swp
