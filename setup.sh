@@ -55,18 +55,24 @@ code --install-extension bazelbuild.vscode-bazel
 kubectl krew install access-matrix
 kubectl krew install advise-psp
 kubectl krew install cert-manager
+kubectl krew install cost
+kubectl krew install deprecations
 kubectl krew install doctor
-kubectl krew install edit-status
 kubectl krew install evict-pod
 kubectl krew install exec-cronjob
 kubectl krew install get-all
+kubectl krew install gke-credentials
+kubectl krew install images
 kubectl krew install ingress-nginx
-kubectl krew install neat
+kubectl krew install kubesec-scan
 kubectl krew install neat
 kubectl krew install np-viewer
 kubectl krew install outdated
+kubectl krew install pod-inspect
+kubectl krew install pod-lens
 kubectl krew install prune-unused
 kubectl krew install rbac-view
+kubectl krew install score
 kubectl krew install service-tree
 kubectl krew install sniff
 kubectl krew install tree
@@ -77,6 +83,12 @@ kubectl krew install view-utilization
 kubectl krew install view-webhook
 kubectl krew install who-can
 kubectl krew install whoami
+
+kubectl krew index add edit-status https://github.com/ulucinar/kubectl-edit-status
+kubectl krew install edit-status/edit-status
+
+kubectl krew index add davidcollom https://github.com/davidcollom/krew-index
+kubectl krew install davidcollom/watch
 
 # Gcloud Components
 gcloud config set disable_usage_reporting false
