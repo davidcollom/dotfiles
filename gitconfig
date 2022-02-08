@@ -3,34 +3,41 @@
 	email = david@collom.co.uk
 
 [include]
-    path = ~/.gitconfig-extras
+  path = ~/.gitconfig-extras
 
 [color]
-    diff=auto
-    status=auto
-    branch=auto
+  diff=auto
+  status=auto
+  branch=auto
 
 [alias]
-	s = status
-	d = diff
-	ds = diff --staged
-	co = checkout
-	br = branch
+  s = status
+  d = diff
+  ds = diff --staged
+  co = checkout
+  br = branch
+  upstream-name = !git remote | egrep -o '(upstream|origin)' | tail -1
+  head-branch = !git remote show $(git upstream-name) | awk '/HEAD branch/ {print $NF}'
+  sync = !git checkout $(git head-branch) && git fetch upstream && git rebase upstream/$(git head-branch) && git push origin $(git head-branch)
+
 
 [help]
-    autocorrect = 5
+  autocorrect = 5
 
 [url "https://"]
-    insteadOf = git://
+  insteadOf = git://
+
 [url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
+  insteadOf = https://github.com/
 
 [diff]
 	tool = diffmerge
 [difftool "diffmerge"]
 	cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
+
 [merge]
 	tool = diffmerge
+
 [mergetool "diffmerge"]
 	trustExitCode = true
 	cmd = diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
