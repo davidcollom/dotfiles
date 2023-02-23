@@ -37,7 +37,7 @@ ssh:
 
 .PHONY: iterm2
 iterm2:
-	open Solarized\ Dark.itermcolors
+	open iterm2/Solarized\ Dark.itermcolors
 
 .PHONY: krew
 krew:
@@ -104,7 +104,7 @@ gcloud:
 
 .PHONY: python
 python:
-	pip3 install -r requirements.txt
+	pip3 install -r python/requirements.txt
 
 
 
