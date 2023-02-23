@@ -1,6 +1,9 @@
 # Compiled Python files
 *.pyc
 
+# Ignore .vscode config
+.vscode
+
 # Folder view configuration files
 .DS_Store
 Desktop.ini

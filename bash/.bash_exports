@@ -4,7 +4,10 @@ export DIGITALOCEAN_ENABLE_BETA=1
 export PATH=~/.krew/bin:${PATH}
 export HISTCONTROL=ignoreboth:erasedups
 
+# Adding Go bin to path
 export PATH="${HOME}/go/bin:$PATH"
+# Adding Python 3.9 bin to path
+export PATH="${PATH}:${HOME}/Library/Python/3.9/bin"
 
 export EDITOR='vim'
 

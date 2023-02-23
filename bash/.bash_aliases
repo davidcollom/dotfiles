@@ -28,7 +28,6 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
-
 # Flush Directory Service cache
 alias flushdns="dscacheutil -flushcache && killall -HUP mDNSResponder"
 
@@ -44,9 +43,11 @@ alias afk="pmset displaysleepnow"
 alias path='echo -e ${PATH//:/\\n}'
 
 alias vault-login="vault login -method=cert"
+
 alias gcloud-personal="gcloud config set core/account david@collom.co.uk"
 alias gcloud-work="gcloud config set core/account david.collom@jetstack.io"
 alias gcloud-login="gcloud auth login; gcloud auth application-default login"
+
 alias k="kubectl"
 alias kctx="kubectx"
 alias kns="kubens"
