@@ -7,17 +7,20 @@ tap "txn2/tap"
 tap "datawire/blackbird"
 tap "alextodicescu/tgenv"
 tap "little-angry-clouds/my-brews"
+tap "homebrew/cask-fonts"
 
 # General
 brew "ack"
-brew "bash-completion"
 brew "bash"
+brew "bash-completion"
+brew "openssh"
 brew "coreutils"
 brew "direnv"
 brew "fzf"
 brew "git"
 brew "htop"
 brew "jq"
+brew "pv"
 brew "lynx"
 brew "mas"
 brew "nmap"
@@ -32,6 +35,7 @@ brew "shellcheck"
 brew "asciinema"
 brew "speedtest-cli"
 brew "pwgen"
+brew "tldr"
 
 # Automation
 brew "ansible"
@@ -46,6 +50,8 @@ brew "git-extras"
 cask "diffmerge"
 brew "go"
 brew "rbenv"
+brew "rbenv-bundle-exec"
+brew "rbenv-bundler"
 brew "pyenv"
 brew "shellcheck"
 brew "gh"
@@ -55,7 +61,7 @@ brew "cookiecutter"
 brew "tmate"
 
 # kubernetes
-brew "gotk"
+brew "fluxcd/tap/flux", link: false
 brew "istioctl"
 brew "kops"
 brew "kube-fzf"
@@ -63,13 +69,13 @@ brew "kubectx"
 brew "kubefwd"
 brew "kubernetes-cli", link: false
 brew "kbenv"
-brew "kubernetes-helm", link: false
+brew "helm", link: false
 brew "helmenv"
 brew "helmfile"
 brew "kubebuilder"
 brew "sops"
 brew "stern"
-cask "osxfuse"
+# cask "osxfuse"
 brew "telepresence"
 brew "krew"
 brew "kind"
@@ -102,7 +108,7 @@ cask "keybase"
 cask "aerial"
 cask "docker"
 cask "firefox"
-cask "flux"
+cask "flux", link: false
 cask "google-chrome"
 cask "iterm2"
 cask "itsycal"
@@ -113,19 +119,24 @@ cask "slack"
 cask "spotify"
 cask "the-unarchiver"
 cask "transmission-remote-gui"
-cask "tunnelblick"
-cask "virtualbox"
+# cask "virtualbox"
 cask "visual-studio-code"
 cask "vlc"
 cask "zoom"
 cask "notion"
 cask 'clockify'
 
-mas "Dashlane", id: 552383089
+cask "yubico-authenticator"
+cask "yubico-yubikey-manager"
+cask "yubico-yubikey-personalization-gui"
+
+mas "Dashlane", id: 517914548
 mas "LanScan", id: 472226235
 mas "Pocket", id: 568494494
-mas "Ring", id: 1142753258
+# mas "Ring", id: 1142753258
 mas "Trello", id: 1278508951
+mas "Webcam Settings", id: 533696630
+mas "Tailscale", id: 1475387142
 
-tap "homebrew/cask-fonts"
+
 cask "font-source-code-pro"
