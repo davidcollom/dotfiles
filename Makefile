@@ -32,7 +32,8 @@ git:
 
 .PHONY: ssh
 ssh:
-	cp -nrv ssh/ ${HOME}
+	mkdir -p ${HOME}/.ssh
+	cp -nrv ssh/ ${HOME}/.ssh/
 
 .PHONY: iterm2
 iterm2:

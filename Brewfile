@@ -48,6 +48,7 @@ cask "google-cloud-sdk"
 
 # Programming
 brew "git-extras"
+brew "git-delta"
 cask "diffmerge"
 brew "go"
 brew "rbenv"
