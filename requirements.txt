@@ -9,3 +9,4 @@ faker
 jsonpatch
 kubernetes
 deepmerge
+diagrams
