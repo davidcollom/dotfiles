@@ -69,6 +69,8 @@ krew:
 
 .PHONY: vscode
 vscode:
+	mkdir -p "${HOME}/Library/Application Support/Code/User/settings.json"
+	cp -nrv vscode/settings.json "${HOME}/Library/Application Support/Code/User/settings.json"
 	code --install-extension DavidAnson.vscode-markdownlint
 	code --install-extension wholroyd.HCL
 	code --install-extension vscode-icons-team.vscode-icons
