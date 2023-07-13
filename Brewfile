@@ -77,6 +77,7 @@ brew "helmfile"
 brew "kubebuilder"
 brew "sops"
 brew "stern"
+brew "kubeaudit"
 # cask "osxfuse"
 brew "telepresence"
 brew "krew"
@@ -131,6 +132,7 @@ cask 'clockify'
 cask "yubico-authenticator"
 cask "yubico-yubikey-manager"
 cask "yubico-yubikey-personalization-gui"
+cask "macmediakeyforwarder"
 
 mas "Dashlane", id: 517914548
 mas "LanScan", id: 472226235
