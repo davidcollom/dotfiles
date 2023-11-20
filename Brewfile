@@ -104,6 +104,7 @@ brew "terraformer"
 brew "pinentry-mac"
 brew "gnupg", link: false
 brew "mkcert"
+brew "age"
 cask "gpg-suite"
 cask "keybase"
 
@@ -112,7 +113,7 @@ cask "aerial"
 cask "docker"
 cask "firefox"
 cask "flux", link: false
-cask "google-chrome"
+# cask "google-chrome"
 cask "iterm2"
 cask "itsycal"
 cask "keepassxc"
@@ -132,12 +133,12 @@ cask 'clockify'
 cask "yubico-authenticator"
 cask "yubico-yubikey-manager"
 cask "yubico-yubikey-personalization-gui"
-cask "macmediakeyforwarder"
 
-mas "Dashlane", id: 517914548
+cask "macmediakeyforwarder"
+cask "spectacle"
+
 mas "LanScan", id: 472226235
 mas "Pocket", id: 568494494
-# mas "Ring", id: 1142753258
 mas "Trello", id: 1278508951
 mas "Webcam Settings", id: 533696630
 mas "Tailscale", id: 1475387142
