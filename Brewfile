@@ -39,12 +39,12 @@ brew "pwgen"
 brew "tldr"
 
 # Automation
-brew "ansible"
+# brew "ansible"
 
 # Cloud
-brew "awscli"
-brew "azure-cli"
-cask "google-cloud-sdk"
+# brew "awscli"
+# brew "azure-cli"
+# cask "google-cloud-sdk"
 
 # Programming
 brew "git-extras"
@@ -62,9 +62,10 @@ brew "cookiecutter"
 # Collaboration
 brew "tmate"
 
-# kubernetes
+# Kubernetes
 brew "fluxcd/tap/flux", link: false
 brew "istioctl"
+brew "linkerd"
 brew "kops"
 brew "kube-fzf"
 brew "kubectx"
@@ -82,8 +83,9 @@ brew "kubeaudit"
 brew "telepresence"
 brew "krew"
 brew "kind"
+brew "minikube"
 brew "velero"
-cask "lens"
+# cask "lens"
 brew "kustomize"
 brew "argo"
 brew "argocd"
@@ -91,13 +93,13 @@ brew "FairwindsOps/tap/pluto"
 brew "kubeseal"
 
 # Hashicorp
-brew "vault"
-brew "packer"
+# brew "vault"
+# brew "packer"
 brew "tfenv"
 brew "tgenv"
 brew "tfsec"
 brew "terraform-docs"
-brew "consul"
+# brew "consul"
 brew "terraformer"
 
 # GPG
@@ -106,11 +108,11 @@ brew "gnupg", link: false
 brew "mkcert"
 brew "age"
 cask "gpg-suite"
-cask "keybase"
+# cask "keybase"
 
 # Applications
 cask "aerial"
-cask "docker"
+brew "docker" # Docker CLI
 cask "firefox"
 cask "flux", link: false
 # cask "google-chrome"
@@ -118,17 +120,17 @@ cask "iterm2"
 cask "itsycal"
 cask "keepassxc"
 cask "keepingyouawake"
-cask "skype"
+# cask "skype"
 cask "slack"
 cask "spotify"
 cask "the-unarchiver"
-cask "transmission-remote-gui"
+# cask "transmission-remote-gui"
 # cask "virtualbox"
 cask "visual-studio-code"
 cask "vlc"
 cask "zoom"
-cask "notion"
-cask 'clockify'
+# cask "notion"
+# cask 'clockify'
 
 cask "yubico-authenticator"
 cask "yubico-yubikey-manager"
