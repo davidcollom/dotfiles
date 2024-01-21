@@ -55,7 +55,7 @@ brew "cookiecutter"
 brew "tmate"
 
 # kubernetes
-brew "gotk"
+brew "fluxcd/tap/flux"
 brew "istioctl"
 brew "kops"
 brew "kube-fzf"
@@ -102,7 +102,7 @@ cask "keybase"
 cask "aerial"
 cask "docker"
 cask "firefox"
-cask "flux"
+cask "flux", link: false
 cask "google-chrome"
 cask "iterm2"
 cask "itsycal"
