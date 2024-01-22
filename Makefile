@@ -39,38 +39,48 @@ ssh:
 iterm2:
 	open iterm2/Solarized\ Dark.itermcolors
 
+kubectl:
+	kbenv install $(shell kbenv list remote| head -n1)
+	kbenv use $(shell kbenv list local)
+
+terraform:
+	tfenv install
+	tfenv use
+	terraform -install-autocomplete
+
+
 .PHONY: krew
-krew:
+krew: kubectl
 	kubectl krew install access-matrix
-	kubectl krew install advise-psp
+	# kubectl krew install advise-psp
 	kubectl krew install cert-manager
-	kubectl krew install doctor
+	# kubectl krew install doctor
 	kubectl krew install edit-status
 	kubectl krew install evict-pod
-	kubectl krew install exec-cronjob
 	kubectl krew install get-all
-	kubectl krew install ingress-nginx
-	kubectl krew install neat
+	# kubectl krew install ingress-nginx
 	kubectl krew install neat
 	kubectl krew install np-viewer
 	kubectl krew install outdated
 	kubectl krew install prune-unused
-	kubectl krew install rbac-view
-	kubectl krew install service-tree
+	# kubectl krew install rbac-view
+	# kubectl krew install service-tree
 	kubectl krew install sniff
 	kubectl krew install tree
-	kubectl krew install unused-volumes
+	# kubectl krew install unused-volumes
 	kubectl krew install view-cert
 	kubectl krew install view-secret
 	kubectl krew install view-utilization
-	kubectl krew install view-webhook
+	# kubectl krew install view-webhook
 	kubectl krew install who-can
 	kubectl krew install whoami
+	kubectl krew index add davidcollom https://github.com/davidcollom/krew-index
+	kubectl krew install davidcollom/watch
 
 .PHONY: vscode
 vscode:
-	mkdir -p "${HOME}/Library/Application Support/Code/User/settings.json"
-	cp -nrv vscode/settings.json "${HOME}/Library/Application Support/Code/User/settings.json"
+	mkdir -p "${HOME}/Library/Application Support/Code/User"
+	-cp -nrv vscode/settings.json "${HOME}/Library/Application Support/Code/User/settings.json"
 	code --install-extension DavidAnson.vscode-markdownlint
 	code --install-extension wholroyd.HCL
 	code --install-extension vscode-icons-team.vscode-icons
