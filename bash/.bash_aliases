@@ -51,6 +51,8 @@ alias gcloud-login="gcloud auth login; gcloud auth application-default login"
 alias k="kubectl"
 alias kctx="kubectx"
 alias kns="kubens"
+# Kubectl Alias
+complete -o default -F __start_kubectl k
 
 alias tf="terraform"
 alias tg="terragrunt"

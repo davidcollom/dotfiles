@@ -42,6 +42,7 @@ iterm2:
 kubectl:
 	kbenv install $(shell kbenv list remote| head -n1)
 	kbenv use $(shell kbenv list local)
+	kubectl completion bash > $(brew --prefix)/etc/bash_completion.d/kubectl
 
 terraform:
 	tfenv install
