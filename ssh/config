@@ -1,0 +1,14 @@
+Host *
+   ServerAliveInterval 120
+   AddKeysToAgent yes
+   UseKeychain yes
+
+Host rpi-* arm-*
+  User pi
+
+Host amd-kube-slave-01
+  User dcollom
+
+Host 192.168.1*
+  HostKeyAlgorithms=+ssh-rsa
+  User root

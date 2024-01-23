@@ -7,6 +7,7 @@ tap "txn2/tap"
 tap "datawire/blackbird"
 tap "alextodicescu/tgenv"
 tap "little-angry-clouds/my-brews"
+tap "dashlane/tap"
 
 # General
 brew "ack"
@@ -33,8 +34,11 @@ brew "asciinema"
 brew "speedtest-cli"
 brew "pwgen"
 
+# Secret Managment
+brew "dashlane/tap/dashlane-cli"
+
 # Automation
-brew "ansible"
+# brew "ansible"
 
 # Cloud
 brew "awscli"

@@ -1,0 +1,16 @@
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+	ignore = dirty
+[submodule "dotbot-brewfile"]
+	path = dotbot-brewfile
+	url = https://github.com/sobolevn/dotbot-brewfile.git
+[submodule "dotbot-includes"]
+	path = dotbot-includes
+	url = https://github.com/vanduc2514/dotbot-includes.git
+[submodule "dotbot-pip"]
+	path = dotbot-pip
+	url = https://github.com/sobolevn/dotbot-pip.git
+[submodule "dotbot-template"]
+	path = dotbot-template
+	url = https://github.com/ssbanerje/dotbot-template.git

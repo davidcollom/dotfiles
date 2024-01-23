@@ -1,0 +1,51 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+
+- clean: ["~"]
+
+- link:
+    ~/.bash_aliases:
+      force: true
+      path: bash/aliases
+    ~/.bash_profile:
+      force: true
+      path: bash/profile
+    ~/.bash_prompt:
+      force: true
+      path: bash/prompt
+    ~/.bash_secrets:
+      force: true
+      path: bash/secrets
+    ~/.bash_exports:
+      force: true
+      path: bash/exports
+    ~/.gitignore:
+      path: git/ignore
+    ~/.gitconfig:
+      path: git/config
+    ~/.ssh/config:
+      path: ssh/config
+
+- create:
+    - ~/Downloads
+    - ~/.bash_history
+    - ~/code
+
+- brewfile:
+    # This accepts the same options as `brew bundle` command:
+    file: Brewfile
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
+    - [sudo chsh -s /usr/local/bin/bash $USER, Change Shell to Bash]
+    - [
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)",
+        Install Homebrew,
+      ]
+    - [setup-mac.sh, Configure MacOS]
+
+- pip:
+    file: requirements.txt
+    user: true # Like --user
