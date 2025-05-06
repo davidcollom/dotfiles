@@ -12,7 +12,7 @@ tap "homebrew/cask-fonts"
 # General
 brew "ack"
 brew "bash"
-brew "bash-completion"
+brew "bash-completion@2"
 brew "openssh"
 brew "stow"
 brew "coreutils"
@@ -37,6 +37,10 @@ brew "asciinema"
 brew "speedtest-cli"
 brew "pwgen"
 brew "tldr"
+
+# ZSH Plugins
+brew "zsh-syntax-highlighting"
+brew "zsh-autosuggestions"
 
 # Automation
 # brew "ansible"
