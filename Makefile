@@ -1,6 +1,6 @@
 default: install
 
-install: mac brew bash git ssh iterm2 krew vscode gcloud python
+install: mac brew zsh bash git ssh iterm2 krew vscode gcloud python
 
 
 UNAME_S := $(shell uname -s)
@@ -20,11 +20,14 @@ endif
 brew:
 	brew bundle
 
-.PHONY: bash
-bash:
-	cp -nrv bash/ ${HOME}
-	echo $(shell brew --prefix)/bin/bash | sudo tee -a /etc/shells
-	sudo chsh -s $(shell brew --prefix)/bin/bash "${USER}"
+.PHONY: zsh
+zsh:
+	# Install zsh
+	if [ -d "${HOME}/.oh-my-zsh" ]; then
+		echo "Oh My Zsh already installed"
+	else
+		sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	fi
 
 .PHONY: git
 git:
