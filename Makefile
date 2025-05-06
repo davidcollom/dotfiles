@@ -22,12 +22,7 @@ brew:
 
 .PHONY: zsh
 zsh:
-	# Install zsh
-	if [ -d "${HOME}/.oh-my-zsh" ]; then
-		echo "Oh My Zsh already installed"
-	else
-		sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	fi
+	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 .PHONY: git
 git:
