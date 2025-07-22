@@ -1,6 +1,25 @@
 [user]
 	name = David Collom
-	email = david@collom.co.uk
+  email = david@collom.co.uk
+	signingkey = D0ACE604DA2BDB29D8BD29F60C69BC31879DE6DC
+
+[includeIf "gitdir:~/repos/github/jetstack/"]
+    path = ~/.gitconfig-work
+[includeIf "gitdir:~/repos/github/cyberark/"]
+    path = ~/.gitconfig-work
+
+[includeIf "gitdir:~/repos/gitlab/"]
+    path = ~/.gitconfig-work
+
+[includeIf "gitdir:~/repos/github/davidcollom/"]
+    path = ~/.gitconfig-personal
+
+[includeIf "gitdir:~/repos/gitlab/davidcollom/"]
+    path = ~/.gitconfig-personal
+
+[includeIf "gitdir:~/repos/github/devopsdays/"]
+    path = ~/.gitconfig-dod
+
 
 [include]
   path = ~/.gitconfig-extras
