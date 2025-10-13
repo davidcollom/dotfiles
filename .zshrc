@@ -89,7 +89,6 @@ plugins=(
     brew
     cp
     direnv
-    dirhistory
     dotenv
     fluxcd
     fzf
