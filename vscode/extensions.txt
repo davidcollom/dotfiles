@@ -1,0 +1,25 @@
+# VS Code extensions installed by `make vscode`.
+# One extension identifier per line, blank lines and `#` comments are ignored.
+
+DavidAnson.vscode-markdownlint
+wholroyd.HCL
+vscode-icons-team.vscode-icons
+rebornix.ruby
+erd0s.terraform-autocomplete
+James-Yu.latex-workshop
+lextudio.restructuredtext
+ms-kubernetes-tools.vscode-kubernetes-tools
+ms-python.python
+golang.go
+redhat.vscode-yaml
+searKing.preview-vscode
+technosophos.vscode-helm
+ms-azuretools.vscode-docker
+hashicorp.terraform
+ms-vscode.sublime-keybindings
+streetsidesoftware.code-spell-checker
+VisualStudioExptTeam.vscodeintellicode
+haaaad.ansible
+vscoss.vscode-ansible
+adamhartford.vscode-base64
+bazelbuild.vscode-bazel

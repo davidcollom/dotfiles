@@ -52,7 +52,9 @@ alias k="kubectl"
 alias kctx="kubectx"
 alias kns="kubens"
 # Kubectl Alias
-complete -o default -F __start_kubectl k
+if type __start_kubectl &> /dev/null; then
+	complete -o default -F __start_kubectl k
+fi
 
 alias tf="terraform"
 alias tg="terragrunt"
