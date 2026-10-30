@@ -1,5 +1,5 @@
 # Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:~/go/bin:/opt/homebrew/bin:$PATH";
+export PATH="$HOME/bin:$HOME/go/bin:/opt/homebrew/bin:$PATH";
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -35,18 +35,29 @@ fi;
 
 
 # Source the Gcloud sdk.
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
+if command -v brew >/dev/null 2>&1; then
+	GCLLOUD_SDK="$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
+	if [ -f "$GCLLOUD_SDK/path.bash.inc" ]; then
+		source "$GCLLOUD_SDK/path.bash.inc"
+	fi
+	if [ -f "$GCLLOUD_SDK/completion.bash.inc" ]; then
+		source "$GCLLOUD_SDK/completion.bash.inc"
+	fi
+elif [ -f /usr/lib/google-cloud-sdk/path.bash.inc ]; then
+	source /usr/lib/google-cloud-sdk/path.bash.inc
+fi
 
 
 # Enable tab completion for `g` by marking it as an alias for `git`
-if type _git &> /dev/null && [ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ]; then
+if type _git &> /dev/null && command -v brew >/dev/null 2>&1 && [ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ]; then
 	complete -o default -o nospace -F _git g;
 fi;
 
 # Terraform autocomplete
-complete -C /opt/homebrew/bin/terraform terraform
-complete -C /opt/homebrew/bin/terraform tf
+if [ -x /opt/homebrew/bin/terraform ]; then
+	complete -C /opt/homebrew/bin/terraform terraform
+	complete -C /opt/homebrew/bin/terraform tf
+fi
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;

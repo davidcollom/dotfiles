@@ -4,6 +4,10 @@ export PATH=$HOME/bin:$HOME/.local/bin:$HOME/go/bin:/opt/homebrew/bin:/usr/local
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Path to your custom Oh My Zsh plugins. Set this before Oh My Zsh is sourced
+# so that the plugin list below can be filtered against what is installed.
+export ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH/custom}"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -100,24 +104,44 @@ plugins=(
     iterm2
     kind
     kube-ps1
-    kubectl kubectx
+    kubectl
+    kubectx
     operator-sdk
     pip
     pre-commit
     ssh
     vscode
     terraform
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
+# Only load the plugins that are actually installed. Without this a single
+# missing plugin (for example on a minimal container) makes Oh My Zsh print a
+# warning for every shell that is started.
+plugins=($(for plugin in $plugins; do
+    [[ -d "$ZSH/plugins/$plugin" || -d "$ZSH_CUSTOM/plugins/$plugin" ]] && echo "$plugin"
+done))
 
-source $ZSH/oh-my-zsh.sh
+
+if [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
+    source "$ZSH/oh-my-zsh.sh"
+else
+    echo "oh-my-zsh is not installed at $ZSH" >&2
+fi
 
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LANG=en_GB.UTF-8
+# Only use en_GB.UTF-8 when the locale is actually available, otherwise fall
+# back to the locale of the system (containers often only ship C.UTF-8).
+if locale -a 2>/dev/null | grep -qi '^en_GB\.utf-\?8$'; then
+    export LANG=en_GB.UTF-8
+elif [[ -z "${LANG:-}" ]]; then
+    export LANG=C.UTF-8
+fi
 export EDITOR='vim'
 
 # Preferred editor for local and remote sessions
@@ -142,20 +166,35 @@ export EDITOR='vim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# zsh-syntax-highlighting and zsh-autosuggestions are loaded by the Oh My Zsh
+# plugins listed above. The Homebrew copies are only used as a fallback, for
+# example on a machine with an older Oh My Zsh installation.
+if [[ -z "${ZSH_HIGHLIGHT_VERSION:-}" && -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+if [[ -z "${ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE:-}" && -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
 alias k="kubectl"
-compdef k=kubectl
 alias kns="kubens"
 alias kctx="kubectx"
 alias tf="terraform"
-compdef tf=terraform
 alias timestamp='date "+%Y-%m-%d %H:%M:%S"'
 
+# `compdef` is provided by Oh My Zsh, so it is only available once it has been
+# sourced. The completion is only registered when the command exists.
+if command -v compdef >/dev/null 2>&1; then
+    command -v kubectl >/dev/null 2>&1 && compdef k=kubectl
+    command -v terraform >/dev/null 2>&1 && compdef tf=terraform
+fi
 
-alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+# Tailscale is only installed on macOS.
+[[ -x "/Applications/Tailscale.app/Contents/MacOS/Tailscale" ]] && alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-[[ -s "/Users/david.collom/.gvm/scripts/gvm" ]] && source "/Users/david.collom/.gvm/scripts/gvm"
+# Go Version Manager
+[[ -s "${GVM_ROOT:-$HOME/.gvm}/scripts/gvm" ]] && source "${GVM_ROOT:-$HOME/.gvm}/scripts/gvm"
+
