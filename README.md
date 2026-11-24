@@ -53,14 +53,17 @@ docker run --rm -it -v "$PWD":/workspaces/dotfiles -w /workspaces/dotfiles \
 | `Brewfile` | Homebrew packages; Mac-only apps are guarded by `OS.mac?` |
 | `.zshrc` | Primary shell config (Oh My Zsh, aliases, PATH) |
 | `bash/` | Bash profile, aliases, exports and prompt |
-| `git/` | Global git config, per-context includes and ignore rules |
+| `git/` | Global git config, per-context includes, local-extras template and ignore rules |
 | `ssh/config` | SSH client defaults |
 | `vscode/settings.json` | VS Code settings (macOS) |
+| `vscode/extensions.txt` | Extension list used by `make vscode` |
 | `iterm2/` | iTerm2 colour scheme |
 | `python/requirements.txt` | Python tooling installed by `make python` |
 | `Makefile` | Bootstrap targets; `make help` lists them |
 
 ## Secrets
 
-No credentials or private keys are stored here. `~/.gitconfig-extras` and
-`~/.bash_secrets` are local-only includes; keep them out of the repo.
+No credentials or private keys are stored here. A commented
+`git/.gitconfig-extras` template is copied to `~/.gitconfig-extras` on first
+install; fill it in locally. `~/.bash_secrets` is a local-only include and stays
+out of the repo.
