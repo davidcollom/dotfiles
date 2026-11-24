@@ -1,3 +1,8 @@
+# Local environment
+.env
+.tmp
+.debug
+
 # Compiled Python files
 *.pyc
 
@@ -26,6 +31,13 @@ Thumbs.db
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
 *.plan
+
+# Python and test artefacts
+__pycache__
+.pytest_cache
+
+# Local AI assistant settings
+**/.claude/settings.local.json
 
 # Swap files
 *.swp
