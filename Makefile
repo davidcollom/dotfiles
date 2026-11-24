@@ -1,9 +1,14 @@
 default: install
 
-install: mac brew zsh bash git ssh iterm2 krew vscode gcloud python
-
-
 UNAME_S := $(shell uname -s)
+
+# GUI/desktop targets are only meaningful on macOS. Codespaces uses the
+# devcontainer feature list instead.
+ifeq ($(UNAME_S),Darwin)
+DESKTOP_TARGETS := mac iterm2 vscode gcloud
+endif
+
+install: brew zsh bash git ssh krew python $(DESKTOP_TARGETS)
 
 ## Install/Setup the system/Clone repo out and
 .PHONY: setup
@@ -12,9 +17,7 @@ setup:
 
 .PHONY: mac
 mac:
-ifeq ($(UNAME_S),Darwin)
 	./setup-mac.sh
-endif
 
 .PHONY: brew
 brew:
@@ -25,29 +28,37 @@ zsh:
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	cp .zshrc ${HOME}/.zshrc
 
+.PHONY: bash
+bash:
+	cp -nrv bash/. ${HOME}/
+
 .PHONY: git
 git:
-	cp -nrv git/ ${HOME}
+	cp -nrv git/. ${HOME}/
 
 .PHONY: ssh
 ssh:
 	mkdir -p ${HOME}/.ssh
-	cp -nrv ssh/ ${HOME}/.ssh/
+	cp -nrv ssh/. ${HOME}/.ssh/
 
 .PHONY: iterm2
 iterm2:
+ifeq ($(UNAME_S),Darwin)
 	open iterm2/Solarized\ Dark.itermcolors
+else
+	@echo "iTerm2 is macOS-only; skipping"
+endif
 
+.PHONY: kubectl
 kubectl:
-	kbenv install $(shell kbenv list remote| head -n1)
-	kbenv use $(shell kbenv list local)
-	kubectl completion bash > $(brew --prefix)/etc/bash_completion.d/kubectl
+	mkdir -p "$$(brew --prefix)/etc/bash_completion.d"
+	kubectl completion bash > "$$(brew --prefix)/etc/bash_completion.d/kubectl"
 
+.PHONY: terraform
 terraform:
 	tfenv install
 	tfenv use
 	terraform -install-autocomplete
-
 
 .PHONY: krew
 krew: kubectl
@@ -79,6 +90,7 @@ krew: kubectl
 
 .PHONY: vscode
 vscode:
+ifeq ($(UNAME_S),Darwin)
 	mkdir -p "${HOME}/Library/Application Support/Code/User"
 	-cp -nrv vscode/settings.json "${HOME}/Library/Application Support/Code/User/settings.json"
 	code --install-extension DavidAnson.vscode-markdownlint
@@ -103,22 +115,25 @@ vscode:
 	code --install-extension vscoss.vscode-ansible
 	code --install-extension adamhartford.vscode-base64
 	code --install-extension bazelbuild.vscode-bazel
+else
+	@echo "VS Code desktop setup is macOS-only; configure extensions in devcontainer.json"
+endif
 
 .PHONY: gcloud
 gcloud:
+ifeq ($(UNAME_S),Darwin)
 	gcloud config set disable_usage_reporting false
 	gcloud components install docker-credential-gcr
 	gcloud components install gsutil
 	gcloud components install gke-gcloud-auth-plugin
 	gcloud components update
+else
+	@echo "gcloud component setup is macOS-only; use the CLI from Brewfile"
+endif
 
 .PHONY: python
 python:
 	pip3 install -r python/requirements.txt
-
-
-
-
 
 ## This help screen
 help:

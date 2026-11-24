@@ -1,5 +1,15 @@
+# Homebrew lives in different places on Apple Silicon, Intel Macs and Linux.
+if [ -x /opt/homebrew/bin/brew ]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [ -x "$HOME/.linuxbrew/bin/brew" ]; then
+	eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
+fi
+: "${HOMEBREW_PREFIX:=/usr/local}"
+
 # Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:~/go/bin:/opt/homebrew/bin:$PATH";
+export PATH="$HOME/bin:$HOME/go/bin:${HOMEBREW_PREFIX}/bin:/usr/local/bin:$PATH";
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -34,9 +44,11 @@ fi;
 
 
 
-# Source the Gcloud sdk.
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
+# Source the Gcloud SDK when it is installed through Homebrew.
+if [ -f "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc" ]; then
+	source "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
+	source "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
+fi
 
 
 # Enable tab completion for `g` by marking it as an alias for `git`
@@ -45,8 +57,10 @@ if type _git &> /dev/null && [ -f "$(brew --prefix)/etc/bash_completion.d/git-co
 fi;
 
 # Terraform autocomplete
-complete -C /opt/homebrew/bin/terraform terraform
-complete -C /opt/homebrew/bin/terraform tf
+if [ -x "${HOMEBREW_PREFIX}/bin/terraform" ]; then
+	complete -C "${HOMEBREW_PREFIX}/bin/terraform" terraform
+	complete -C "${HOMEBREW_PREFIX}/bin/terraform" tf
+fi
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;

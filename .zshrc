@@ -1,5 +1,15 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/go/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
+# Homebrew lives in different places on Apple Silicon, Intel Macs and Linux.
+# `brew shellenv` sets HOMEBREW_PREFIX and adds brew to PATH where available.
+if [ -x /opt/homebrew/bin/brew ]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [ -x "$HOME/.linuxbrew/bin/brew" ]; then
+	eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
+fi
+: "${HOMEBREW_PREFIX:=/usr/local}"
+
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/.krew/bin:${HOMEBREW_PREFIX}/bin:/usr/local/bin:$PATH"
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -97,7 +107,6 @@ plugins=(
     git
     golang
     history-substring-search
-    iterm2
     kind
     kube-ps1
     kubectl kubectx
@@ -109,8 +118,10 @@ plugins=(
     terraform
 )
 
+# The iTerm2 integration plugin is only useful on macOS.
+[[ "$(uname -s)" == "Darwin" ]] && plugins+=( iterm2 )
 
-source $ZSH/oh-my-zsh.sh
+[[ -s "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
@@ -142,8 +153,12 @@ export EDITOR='vim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [ -f "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+	source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+if [ -f "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+	source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
 
 alias k="kubectl"
 compdef k=kubectl
@@ -154,8 +169,13 @@ compdef tf=terraform
 alias timestamp='date "+%Y-%m-%d %H:%M:%S"'
 
 
-alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+if [ -x "/Applications/Tailscale.app/Contents/MacOS/Tailscale" ]; then
+	alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+fi
 
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+# Node is versioned by Homebrew; only add it when it is actually installed.
+if [ -d "${HOMEBREW_PREFIX}/opt/node@24/bin" ]; then
+	export PATH="${HOMEBREW_PREFIX}/opt/node@24/bin:$PATH"
+fi
 
-[[ -s "/Users/david.collom/.gvm/scripts/gvm" ]] && source "/Users/david.collom/.gvm/scripts/gvm"
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
