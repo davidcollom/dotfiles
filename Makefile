@@ -12,36 +12,44 @@ install: brew zsh bash git ssh krew python $(DESKTOP_TARGETS)
 
 ## Install/Setup the system/Clone repo out and
 .PHONY: setup
+## Install/Setup the system/Clone repo out and
 setup:
 	./setup.sh
 
 .PHONY: mac
+## Apply macOS system defaults
 mac:
 	./setup-mac.sh
 
 .PHONY: brew
+## Install the Homebrew bundle from the Brewfile
 brew:
 	brew bundle
 
 .PHONY: zsh
+## Install Oh My Zsh and the zsh configuration
 zsh:
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	cp .zshrc ${HOME}/.zshrc
 
 .PHONY: bash
+## Copy the bash configuration into the home directory
 bash:
 	cp -nrv bash/. ${HOME}/
 
 .PHONY: git
+## Copy the git configuration into the home directory
 git:
 	cp -nrv git/. ${HOME}/
 
 .PHONY: ssh
+## Copy the SSH configuration into the home directory
 ssh:
 	mkdir -p ${HOME}/.ssh
 	cp -nrv ssh/. ${HOME}/.ssh/
 
 .PHONY: iterm2
+## Open the iTerm2 colour scheme (macOS only)
 iterm2:
 ifeq ($(UNAME_S),Darwin)
 	open iterm2/Solarized\ Dark.itermcolors
@@ -50,17 +58,20 @@ else
 endif
 
 .PHONY: kubectl
+## Install kubectl bash completion
 kubectl:
 	mkdir -p "$$(brew --prefix)/etc/bash_completion.d"
 	kubectl completion bash > "$$(brew --prefix)/etc/bash_completion.d/kubectl"
 
 .PHONY: terraform
+## Install and select Terraform via tfenv
 terraform:
 	tfenv install
 	tfenv use
 	terraform -install-autocomplete
 
 .PHONY: krew
+## Install kubectl and a set of krew plugins
 krew: kubectl
 	kubectl krew install access-matrix
 	# kubectl krew install advise-psp
@@ -89,37 +100,21 @@ krew: kubectl
 	kubectl krew install davidcollom/watch
 
 .PHONY: vscode
+## Copy VS Code settings and install extensions (macOS only)
 vscode:
 ifeq ($(UNAME_S),Darwin)
 	mkdir -p "${HOME}/Library/Application Support/Code/User"
 	-cp -nrv vscode/settings.json "${HOME}/Library/Application Support/Code/User/settings.json"
-	code --install-extension DavidAnson.vscode-markdownlint
-	code --install-extension wholroyd.HCL
-	code --install-extension vscode-icons-team.vscode-icons
-	code --install-extension rebornix.ruby
-	code --install-extension erd0s.terraform-autocomplete
-	code --install-extension James-Yu.latex-workshop
-	code --install-extension lextudio.restructuredtext
-	code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
-	code --install-extension ms-python.python
-	code --install-extension golang.go
-	code --install-extension redhat.vscode-yaml
-	code --install-extension searKing.preview-vscode
-	code --install-extension technosophos.vscode-helm
-	code --install-extension ms-azuretools.vscode-docker
-	code --install-extension hashicorp.terraform
-	code --install-extension ms-vscode.sublime-keybindings
-	code --install-extension streetsidesoftware.code-spell-checker
-	code --install-extension VisualStudioExptTeam.vscodeintellicode
-	code --install-extension haaaad.ansible
-	code --install-extension vscoss.vscode-ansible
-	code --install-extension adamhartford.vscode-base64
-	code --install-extension bazelbuild.vscode-bazel
+	@while read -r extension; do \
+		case "$$extension" in ''|\#*) continue ;; esac; \
+		code --install-extension "$$extension" || true; \
+	done < vscode/extensions.txt
 else
 	@echo "VS Code desktop setup is macOS-only; configure extensions in devcontainer.json"
 endif
 
 .PHONY: gcloud
+## Configure the gcloud CLI (macOS only)
 gcloud:
 ifeq ($(UNAME_S),Darwin)
 	gcloud config set disable_usage_reporting false
@@ -132,6 +127,7 @@ else
 endif
 
 .PHONY: python
+## Install the Python requirements
 python:
 	pip3 install -r python/requirements.txt
 

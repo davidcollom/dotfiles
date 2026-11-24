@@ -13,6 +13,8 @@ export PATH="$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/.krew/bin:${HOMEBREW_
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+# Set before Oh My Zsh is sourced so plugins can be filtered by what is installed.
+export ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH/custom}"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -109,7 +111,8 @@ plugins=(
     history-substring-search
     kind
     kube-ps1
-    kubectl kubectx
+    kubectl
+    kubectx
     operator-sdk
     pip
     pre-commit
@@ -121,14 +124,29 @@ plugins=(
 # The iTerm2 integration plugin is only useful on macOS.
 [[ "$(uname -s)" == "Darwin" ]] && plugins+=( iterm2 )
 
-[[ -s "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"
+# Only load plugins that are actually installed; a missing plugin otherwise
+# prints a warning on every shell start in minimal containers.
+plugins=($(for plugin in $plugins; do
+	[[ -d "$ZSH/plugins/$plugin" || -d "$ZSH_CUSTOM/plugins/$plugin" ]] && echo "$plugin"
+done))
+
+if [[ -s "$ZSH/oh-my-zsh.sh" ]]; then
+	source "$ZSH/oh-my-zsh.sh"
+else
+	echo "oh-my-zsh is not installed at $ZSH" >&2
+fi
 
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LANG=en_GB.UTF-8
+# Containers often only ship C.UTF-8, so only set en_GB when it is available.
+if locale -a 2>/dev/null | grep -qi '^en_GB\.utf-\?8$'; then
+	export LANG=en_GB.UTF-8
+elif [[ -z "${LANG:-}" ]]; then
+	export LANG=C.UTF-8
+fi
 export EDITOR='vim'
 
 # Preferred editor for local and remote sessions
@@ -161,12 +179,16 @@ if [ -f "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]
 fi
 
 alias k="kubectl"
-compdef k=kubectl
 alias kns="kubens"
 alias kctx="kubectx"
 alias tf="terraform"
-compdef tf=terraform
 alias timestamp='date "+%Y-%m-%d %H:%M:%S"'
+
+# compdef comes from Oh My Zsh, so only register completions when it exists.
+if command -v compdef >/dev/null 2>&1; then
+	command -v kubectl >/dev/null 2>&1 && compdef k=kubectl
+	command -v terraform >/dev/null 2>&1 && compdef tf=terraform
+fi
 
 
 if [ -x "/Applications/Tailscale.app/Contents/MacOS/Tailscale" ]; then
@@ -178,4 +200,4 @@ if [ -d "${HOMEBREW_PREFIX}/opt/node@24/bin" ]; then
 	export PATH="${HOMEBREW_PREFIX}/opt/node@24/bin:$PATH"
 fi
 
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+[[ -s "${GVM_ROOT:-$HOME/.gvm}/scripts/gvm" ]] && source "${GVM_ROOT:-$HOME/.gvm}/scripts/gvm"
