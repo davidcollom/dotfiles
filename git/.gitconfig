@@ -1,7 +1,7 @@
 [user]
 	name = David Collom
   email = david@collom.co.uk
-	signingkey = D0ACE604DA2BDB29D8BD29F60C69BC31879DE6DC
+	signingkey = ~/.ssh/id_ed25519.pub
 
 [includeIf "gitdir:~/repos/github/jetstack/"]
     path = ~/.gitconfig-work
@@ -48,6 +48,8 @@
 
 [url "ssh://git@github.com/"]
   insteadOf = https://github.com/
+[url "git@github.com:"]
+  insteadOf = https://github.com/
 
 [diff]
 	tool = diffmerge
@@ -66,3 +68,14 @@
 
 [core]
 	excludesFile = ~/.gitignore
+
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
+[branch]
+	autoSetupMerge = simple
+[push]
+	autoSetupRemote = true

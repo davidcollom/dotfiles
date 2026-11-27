@@ -1,0 +1,8 @@
+# Extra git configuration.
+#
+# Included by ~/.gitconfig for machine-local settings such as credential
+# helpers. Copied into the home directory by `make git` and never overwritten
+# once it exists.
+
+[credential]
+	# helper = osxkeychain
