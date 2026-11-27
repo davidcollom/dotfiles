@@ -40,6 +40,7 @@ brew "jq"
 brew "mkcert"
 brew "openssh"
 brew "pipx"
+brew "bash-completion@2"
 brew "pre-commit"
 brew "pv"
 brew "pwgen"
@@ -63,7 +64,7 @@ brew "zsh-syntax-highlighting"
 # Languages and runtimes
 brew "cookiecutter"
 brew "go"
-brew "node@24", link: true
+brew "node@24"
 
 # AI and developer tooling
 brew "anomalyco/tap/opencode"
