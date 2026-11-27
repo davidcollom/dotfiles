@@ -1,153 +1,151 @@
 cask_args appdir: "/Applications"
 
-tap "homebrew/cask"
-tap "thecasualcoder/stable"
-tap "fluxcd/tap"
-tap "txn2/tap"
-tap "datawire/blackbird"
+# Third-party taps used by the formulas below.
 tap "alextodicescu/tgenv"
+tap "anomalyco/tap"
+tap "datawire/blackbird"
+tap "fluxcd/tap"
+tap "goreleaser/tap"
+tap "komodorio/komocli"
 tap "little-angry-clouds/my-brews"
-tap "homebrew/cask-fonts"
+tap "minamijoyo/tfupdate"
+tap "norwoodj/tap"
+tap "pulumi/tap"
+tap "snyk/tap"
+tap "thecasualcoder/stable"
+tap "txn2/tap"
+tap "upbound/tap"
 
-# General
+# Brewfiles are Ruby, so a single file can serve macOS and Linux (Codespaces).
+if OS.mac?
+  tap "homebrew/cask"
+  tap "homebrew/cask-fonts"
+end
+
+# General CLI
 brew "ack"
-brew "bash"
-brew "bash-completion@2"
-brew "openssh"
-brew "stow"
+brew "age"
+brew "asciinema"
+brew "bat"
 brew "coreutils"
 brew "direnv"
 brew "fzf"
+brew "gh"
 brew "git"
+brew "git-delta"
+brew "git-extras"
+brew "graphviz"
 brew "htop"
 brew "jq"
+brew "mkcert"
+brew "openssh"
+brew "pipx"
+brew "bash-completion@2"
+brew "pre-commit"
 brew "pv"
-brew "lynx"
-brew "mas"
-brew "nmap"
+brew "pwgen"
+brew "pyenv"
+brew "redis"
 brew "rsync"
+brew "shellcheck"
 brew "ssh-copy-id"
-brew "telnet"
+brew "stow"
+brew "tldr"
+brew "tmate"
 brew "tree"
+brew "uv"
 brew "watch"
 brew "wget"
 brew "yq"
-brew "shellcheck"
-brew "asciinema"
-brew "speedtest-cli"
-brew "pwgen"
-brew "tldr"
-
-# ZSH Plugins
-brew "zsh-syntax-highlighting"
+brew "zsh"
 brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
 
-# Automation
-# brew "ansible"
-
-# Cloud
-# brew "awscli"
-# brew "azure-cli"
-# cask "google-cloud-sdk"
-
-# Programming
-brew "git-extras"
-brew "git-delta"
-cask "diffmerge"
-brew "go"
-brew "rbenv"
-brew "rbenv-bundle-exec"
-brew "rbenv-bundler"
-brew "pyenv"
-brew "shellcheck"
-brew "gh"
+# Languages and runtimes
 brew "cookiecutter"
+brew "go"
+brew "node@24"
 
-# Collaboration
-brew "tmate"
+# AI and developer tooling
+brew "anomalyco/tap/opencode"
+brew "golangci-lint"
+brew "go-critic"
+brew "svu"
 
 # Kubernetes
-brew "fluxcd/tap/flux", link: false
-brew "istioctl"
-brew "linkerd"
-brew "kops"
-brew "kube-fzf"
-brew "kubectx"
-brew "kubefwd"
-brew "kubernetes-cli", link: false
-brew "kbenv"
-brew "helm", link: false
-brew "helmenv"
-brew "helmfile"
-brew "kubebuilder"
-brew "sops"
-brew "stern"
-brew "kubeaudit"
-# cask "osxfuse"
-brew "telepresence"
-brew "krew"
-brew "kind"
-brew "minikube"
-brew "velero"
-# cask "lens"
-brew "kustomize"
 brew "argo"
 brew "argocd"
-brew "FairwindsOps/tap/pluto"
-brew "kubeseal"
+brew "fluxcd/tap/flux", link: true
+brew "helm", link: false
+brew "helmfile"
+brew "kbenv"
+brew "kind"
+brew "kubeaudit"
+brew "kubectx"
+brew "krew"
+brew "kustomize"
+brew "minikube"
+brew "norwoodj/tap/helm-docs"
+brew "stern"
+brew "kubernetes-cli", link: false
 
-# Hashicorp
-# brew "vault"
-# brew "packer"
-brew "tfenv"
-brew "tgenv"
-brew "tfsec"
+# Terraform / Pulumi
+brew "minamijoyo/tfupdate/tfupdate"
 brew "terraform-docs"
-# brew "consul"
 brew "terraformer"
+brew "tfenv"
+brew "tfsec"
+brew "tflint"
+brew "tgenv"
+brew "pulumi/tap/pulumi"
 
-# GPG
-brew "pinentry-mac"
-brew "gnupg", link: false
-brew "mkcert"
-brew "age"
-cask "gpg-suite"
-# cask "keybase"
+# Cloud and platform CLIs
+brew "actionlint"
+brew "awscli"
+brew "azure-cli"
+brew "cosign"
+brew "crane"
+brew "crossplane"
+brew "eksctl"
+brew "ko"
+brew "komodorio/komocli/komocli"
+brew "oci-cli"
+brew "snyk/tap/snyk"
+brew "upbound/tap/up"
 
-# Applications
-cask "aerial"
-brew "docker" # Docker CLI
-cask "firefox"
-cask "flux", link: false
-# cask "google-chrome"
-cask "iterm2"
-cask "itsycal"
-cask "keepassxc"
-cask "keepingyouawake"
-# cask "skype"
-cask "slack"
-cask "spotify"
-cask "the-unarchiver"
-# cask "transmission-remote-gui"
-# cask "virtualbox"
-cask "visual-studio-code"
-cask "vlc"
-cask "zoom"
-# cask "notion"
-# cask 'clockify'
+if OS.mac?
+  brew "docker" # Docker CLI; in Codespaces this comes from the devcontainer feature
+  brew "mas"
 
-cask "yubico-authenticator"
-cask "yubico-yubikey-manager"
-cask "yubico-yubikey-personalization-gui"
+  # Applications (macOS only)
+  cask "aerial"
+  cask "chatgpt"
+  cask "claude-code"
+  cask "diffmerge"
+  cask "docker-desktop"
+  cask "firefox"
+  cask "font-source-code-pro"
+  cask "flux"
+  cask "gcloud-cli"
+  cask "goreleaser/tap/goreleaser"
+  cask "ibm-cloud-cli"
+  cask "iterm2"
+  cask "itsycal"
+  cask "keepingyouawake"
+  cask "localsend"
+  cask "microsoft-teams"
+  cask "notion"
+  cask "rectangle"
+  cask "slack"
+  cask "spotify"
+  cask "tailscale-app"
+  cask "temurin@17"
+  cask "the-unarchiver"
+  cask "visual-studio-code"
+  cask "vlc"
+  cask "webex"
+  cask "wizcli"
+  cask "zoom"
 
-cask "macmediakeyforwarder"
-cask "spectacle"
-
-mas "LanScan", id: 472226235
-mas "Pocket", id: 568494494
-mas "Trello", id: 1278508951
-mas "Webcam Settings", id: 533696630
-mas "Tailscale", id: 1475387142
-
-
-cask "font-source-code-pro"
+  mas "Webcam Settings", id: 533696630
+end
