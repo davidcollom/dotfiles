@@ -1,8 +1,20 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/go/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
+# Homebrew lives in different places on Apple Silicon, Intel Macs and Linux.
+# `brew shellenv` sets HOMEBREW_PREFIX and adds brew to PATH where available.
+if [ -x /opt/homebrew/bin/brew ]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [ -x "$HOME/.linuxbrew/bin/brew" ]; then
+	eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
+fi
+: "${HOMEBREW_PREFIX:=/usr/local}"
+
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/.krew/bin:${HOMEBREW_PREFIX}/bin:/usr/local/bin:$PATH"
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+# Set before Oh My Zsh is sourced so plugins can be filtered by what is installed.
+export ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH/custom}"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -97,10 +109,10 @@ plugins=(
     git
     golang
     history-substring-search
-    iterm2
     kind
     kube-ps1
-    kubectl kubectx
+    kubectl
+    kubectx
     operator-sdk
     pip
     pre-commit
@@ -109,15 +121,32 @@ plugins=(
     terraform
 )
 
+# The iTerm2 integration plugin is only useful on macOS.
+[[ "$(uname -s)" == "Darwin" ]] && plugins+=( iterm2 )
 
-source $ZSH/oh-my-zsh.sh
+# Only load plugins that are actually installed; a missing plugin otherwise
+# prints a warning on every shell start in minimal containers.
+plugins=($(for plugin in $plugins; do
+	[[ -d "$ZSH/plugins/$plugin" || -d "$ZSH_CUSTOM/plugins/$plugin" ]] && echo "$plugin"
+done))
+
+if [[ -s "$ZSH/oh-my-zsh.sh" ]]; then
+	source "$ZSH/oh-my-zsh.sh"
+else
+	echo "oh-my-zsh is not installed at $ZSH" >&2
+fi
 
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LANG=en_GB.UTF-8
+# Containers often only ship C.UTF-8, so only set en_GB when it is available.
+if locale -a 2>/dev/null | grep -qi '^en_GB\.utf-\?8$'; then
+	export LANG=en_GB.UTF-8
+elif [[ -z "${LANG:-}" ]]; then
+	export LANG=C.UTF-8
+fi
 export EDITOR='vim'
 
 # Preferred editor for local and remote sessions
@@ -142,20 +171,33 @@ export EDITOR='vim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [ -f "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+	source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+if [ -f "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+	source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
 
 alias k="kubectl"
-compdef k=kubectl
 alias kns="kubens"
 alias kctx="kubectx"
 alias tf="terraform"
-compdef tf=terraform
 alias timestamp='date "+%Y-%m-%d %H:%M:%S"'
 
+# compdef comes from Oh My Zsh, so only register completions when it exists.
+if command -v compdef >/dev/null 2>&1; then
+	command -v kubectl >/dev/null 2>&1 && compdef k=kubectl
+	command -v terraform >/dev/null 2>&1 && compdef tf=terraform
+fi
 
-alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+if [ -x "/Applications/Tailscale.app/Contents/MacOS/Tailscale" ]; then
+	alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+fi
 
-[[ -s "/Users/david.collom/.gvm/scripts/gvm" ]] && source "/Users/david.collom/.gvm/scripts/gvm"
+# Node is versioned by Homebrew; only add it when it is actually installed.
+if [ -d "${HOMEBREW_PREFIX}/opt/node@24/bin" ]; then
+	export PATH="${HOMEBREW_PREFIX}/opt/node@24/bin:$PATH"
+fi
+
+[[ -s "${GVM_ROOT:-$HOME/.gvm}/scripts/gvm" ]] && source "${GVM_ROOT:-$HOME/.gvm}/scripts/gvm"
