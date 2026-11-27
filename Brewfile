@@ -7,7 +7,7 @@ tap "datawire/blackbird"
 tap "fluxcd/tap"
 tap "goreleaser/tap"
 tap "komodorio/komocli"
-tap "little-angry-clouds/homebrew-my-brews"
+tap "little-angry-clouds/my-brews"
 tap "minamijoyo/tfupdate"
 tap "norwoodj/tap"
 tap "pulumi/tap"
@@ -63,7 +63,7 @@ brew "zsh-syntax-highlighting"
 # Languages and runtimes
 brew "cookiecutter"
 brew "go"
-brew "node@24"
+brew "node@24", link: true
 
 # AI and developer tooling
 brew "anomalyco/tap/opencode"
@@ -77,6 +77,7 @@ brew "argocd"
 brew "fluxcd/tap/flux", link: true
 brew "helm", link: false
 brew "helmfile"
+brew "kbenv"
 brew "kind"
 brew "kubeaudit"
 brew "kubectx"
@@ -125,7 +126,7 @@ if OS.mac?
   cask "font-source-code-pro"
   cask "flux"
   cask "gcloud-cli"
-  cask "goreleaser"
+  cask "goreleaser/tap/goreleaser"
   cask "ibm-cloud-cli"
   cask "iterm2"
   cask "itsycal"
